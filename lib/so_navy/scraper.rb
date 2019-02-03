@@ -23,15 +23,19 @@ class SoNavy::Scraper
     puts "In Scrapper"
     puts category.url
     webpage = Nokogiri::HTML(open(category.url))
+
+  
+    items = webpage.css(".content")
     binding.pry
-    items = webpage.css("div.row div.col.information")
     items.each do |card|
       #creating an instance
       item = SoNavy::Item.new
 
       # name_and_price = card.css("a.go-link").text.split("$")
-      #   name = webpage.css(".content h2")[1].text
-      #   description = webpage.css(".content p")[1].text
+      #   My scrape
+      #Assigning object attributes
+        item.product = webpage.css(".content h2").text
+        item.description = webpage.css(".content p").text
 
       #Assigning object attributes
       # item.description = card.css("p").text

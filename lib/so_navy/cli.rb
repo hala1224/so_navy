@@ -67,13 +67,13 @@ class SoNavy::CLI
      
      puts "In display and category is" 
      puts category.url
-    SoNavy::Scraper.scrape_items(category)
-    puts "Here are the items for #{category.name}:\n"
-    category.items.each.with_index(1) do |item, index|   #represents an array of item objects
-      #print out info about each item
-      puts "\n#{index}. #{item.product}"
-      puts "Price: #{item.price}"
-      puts item.description
+     SoNavy::Scraper.scrape_items(category)
+     puts "Here are the items for #{category.name}:\n"
+     category.items.each.with_index(1) do |item, index|   #represents an array of item objects
+        #print out info about each item
+        puts "\n#{index}. #{item.product}"
+        puts "Price: #{item.price}"
+        puts item.description
     end
     second_menu
   end
