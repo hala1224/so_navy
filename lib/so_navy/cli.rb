@@ -12,7 +12,9 @@ class SoNavy::CLI
          puts "You chose Something Navy"
         # Scrapping the Something Navy category
          url = "https://somethingnavy.com/category/something-navy/"
-        SoNavy::Scraper.scrape_categories(url)
+        categories = SoNavy::Scraper.scrape_categories(url)
+        puts categories[1].name
+        puts categories[1].url
        when 2
           puts "You chose Fashion"
        when 3
