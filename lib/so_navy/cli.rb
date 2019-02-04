@@ -65,14 +65,15 @@ class SoNavy::CLI
   
    def display_category_items(category)
      
-     puts "In display and category is" 
-     puts category.url
+    # puts "In display and category is" 
+    # puts category.url
      SoNavy::Scraper.scrape_items(category)
      puts "Here are the items for #{category.name}:\n"
+     
+    #puts " In display_category length #{items.length}"
      category.items.each.with_index(1) do |item, index|   #represents an array of item objects
         #print out info about each item
         puts "\n#{index}. #{item.product}"
-        puts "Price: #{item.price}"
         puts item.description
     end
     second_menu
@@ -81,6 +82,24 @@ class SoNavy::CLI
    def scrape_somenavy
       url = "https://somethingnavy.com/category/something-navy/"
       categories =  SoNavy::Scraper.scrape_categories(url)
+  end
+  
+  def second_menu
+    puts "Would you like to look at another category? Type 'C'"
+    puts "Would you like to go to the start? Type 'S'"
+    puts "Would you like to exit? Type 'E'"
+    input = gets.strip.upcase
+    if input == "C"
+      list_categories
+      choose_category
+    elsif input == "S"
+      menu
+    elsif input == "E"
+      puts "Goodbye!"
+    else
+      puts "Sorry I couldn't understand that command"
+      second_menu
+    end
   end
   
 end

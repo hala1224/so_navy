@@ -11,7 +11,7 @@ class SoNavy::Scraper
     
     
      array_of_links.each.map do |link|
-      # binding.pry
+    
        SoNavy::Category.new(link.text.delete!("\n\t"), link.attributes["href"].value)
      end  
     # return value is array of objects containing category name and url
@@ -20,31 +20,63 @@ class SoNavy::Scraper
   
   
   def self.scrape_items(category)
-    puts "In Scrapper"
-    puts category.url
+    
     webpage = Nokogiri::HTML(open(category.url))
-
-  
     items = webpage.css(".content")
-    binding.pry
+    
+    # first element on the page is not a sweater
+    items.shift()
+    puts "in self scrape"
+    puts items.length
+    
+    
+    # items.each.with_index(1) do |card, index|
+    
+    i=0
     items.each do |card|
-      #creating an instance
-      item = SoNavy::Item.new
-
-      # name_and_price = card.css("a.go-link").text.split("$")
-      #   My scrape
-      #Assigning object attributes
-        item.product = webpage.css(".content h2").text
-        item.description = webpage.css(".content p").text
-
-      #Assigning object attributes
-      # item.description = card.css("p").text
-      # deal.product = name_and_price[0]
-      # deal.price = name_and_price[1]
-
-      #Associated Objects
-      category.add_item(item)
-
+    
+    # added
+     if !card.css("h2").text.include?("\n")
+        #   #creating an instance
+           item = SoNavy::Item.new
+          
+        #   #   2nd level scrape
+      
+    
+              item.product = card.css(" h2").text
+              item.description = card.css("p").text
+    
+          
+            # if !item.product.include?("\n\t")  then
+               #   #Associated Objects
+               
+                 category.add_item(item)
+               
+                # puts "in if #{item.product}, #{item.description}"
+                 i=i+1
+       
+        end
     end
+    
+    
   end
 end
+# def self.scrape_items(category)
+#     webpage = Nokogiri::HTML(open(category.url))
+#     items = webpage.css("div.row div.col.information")
+#     items.each do |card|
+#       #creating an instance
+#       deal = Dealio::Deal.new
+
+#       name_and_price = card.css("a.go-link").text.split("$")
+
+#       #Assigning object attributes
+#       deal.description = card.css("p").text
+#       deal.product = name_and_price[0]
+#       deal.price = name_and_price[1]
+
+#       #Associated Objects
+#       category.add_deal(deal)
+
+#     end
+#   end

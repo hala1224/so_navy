@@ -1,6 +1,6 @@
 class SoNavy::Category
-  attr_accessor :name, :url
-  attr_reader :items
+  attr_accessor :name, :url, :items
+  # attr_reader :items
     
     
   @@all=[]
