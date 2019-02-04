@@ -70,7 +70,7 @@ class SoNavy::CLI
      SoNavy::Scraper.scrape_items(category)
      puts "Here are the items for #{category.name}:\n"
      
-    #puts " In display_category length #{items.length}"
+    puts " In display_category length #{category.items.length}"
      category.items.each.with_index(1) do |item, index|   #represents an array of item objects
         #print out info about each item
         puts "\n#{index}. #{item.product}"
