@@ -24,23 +24,21 @@ class SoNavy::Scraper
     webpage = Nokogiri::HTML(open(category.url))
     items = webpage.css(".content")
     
-    # first element on the page is not a sweater
-    items.shift()
-    puts "in self scrape"
-    puts items.length
+    # Grabing first 5 elements on the page since 6-12 are not items
+
+    new_items=[]
+    new_items=items[1..5]
+
+    new_items.each do |card|
     
-    
-    # items.each.with_index(1) do |card, index|
-    
-    i=0
-    items.each do |card|
-    
-    # added
-         if !card.css("h2").nil? && !card.css("h2").text.include?("\n\t")
-            #   #creating an instance
-               item = SoNavy::Item.new
+                 # Making sure no blanks or new line
+                 
+        if !card.css("h2").nil? && !card.css("h2").text.include?("\n\t")
+          
+              #creating an instance
+              item = SoNavy::Item.new
               
-            #   #   2nd level scrape
+              #   2nd level scrape
           
         
                   item.product = card.css(" h2").text
@@ -48,19 +46,14 @@ class SoNavy::Scraper
         
               
           
-             #   #Associated Objects
+            #   #Associated Objects
                    
-                     category.add_item(item)
+                    category.add_item(item)
                    
-                    # puts "in if #{item.product}, #{item.description}"
-                     i=i+1
-          # else
-          #           item.delete_at(i)
+      
            
             end
-       end
+      end
        
-      # items.slice(i, items.length)
-       puts "The counter is : #{i}"
   end
 end
