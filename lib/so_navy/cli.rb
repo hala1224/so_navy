@@ -26,10 +26,23 @@ class SoNavy::CLI
         
         # puts categories[0].name
         # puts categories[0].url
-       when 2
+   
+   e    when 2
           puts "You chose Fashion"
+          # scrape Fashion category
+          scrape_fashion
+          list_categories
+          choose_category
+          
+          
        when 3
           puts "You chose Something else"
+          
+          scrape_somelse
+          list_categories
+          choose_category
+          
+          
        when 4
           puts "Thanks for stopping by!"
     else 
@@ -82,6 +95,16 @@ class SoNavy::CLI
    def scrape_somenavy
       url = "https://somethingnavy.com/category/something-navy/"
       categories =  SoNavy::Scraper.scrape_categories(url)
+  end
+  
+  def scrape_fashion
+     url="https://somethingnavy.com/category/fashion/"
+     categories =  SoNavy::Scraper.scrape_categories(url)
+  end
+  
+  def scrape_somelse
+    url="https://somethingnavy.com/category/something-else/"
+    categories =  SoNavy::Scraper.scrape_categories(url)
   end
   
   def second_menu
