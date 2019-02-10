@@ -3,6 +3,7 @@
 require "nokogiri"
 require "open-uri"
 require "pry"
+require "colorize"
 
 require_relative "so_navy/version"
 require_relative "so_navy/cli"
