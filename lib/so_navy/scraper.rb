@@ -18,7 +18,7 @@ class SoNavy::Scraper
      
     # direct link 
     array_of_links = webpage.css("div.shop-nav > div > nav:nth-child(#{index}) > span:nth-child(#{index}) > div > div > a")
-     
+                                  
     array_of_links.map do |link|
      SoNavy::Category.new(link.text.delete!("\n\t"), link.attributes["href"].value, type)
     end
@@ -35,27 +35,28 @@ class SoNavy::Scraper
   
   def self.scrape_items(category)
     puts "In scrape url is #{category.url}"
+  
     webpage = Nokogiri::HTML(open(category.url))
     items = webpage.css("div.shop-product")
     
-    # Grabing first 5 elements on the page since 6-12 are not items
-
+    
+    
+    # puts "In 2nd scrape the length is #{items}"
   
-
     items.each do |card|
     
                  # Making sure no blanks or new line
                  
-        # if !card.css("h2").nil? && !card.css("h2").text.include?("\n\t")
-          
+        if !card.css("h3").nil? && !card.css("h2 a").nil? then
+        
               #creating an instance
               item = SoNavy::Item.new
               
               #   2nd level scrape
           
         
-                  item.product = card.css(" h3").text.delete!("        \n\t")
-                  item.description = card.css(" h2 a").text.delete!("\n\t")
+                  item.product = card.css("h3").text.delete!("        \n\t")
+                  item.description = card.css("h2 a").text.delete!("\n\t")
                   # item.link = card.css(" h3 a").attributes["href"].value
 
               
@@ -66,7 +67,7 @@ class SoNavy::Scraper
                    
       
            
-            # end
+            end
       end
        
   end

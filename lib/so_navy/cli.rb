@@ -38,7 +38,7 @@ class SoNavy::CLI
          # Scrapping Designer Accesories category
         
         @type = "accessories"
-        if Dealio::Category.type(@type) == []
+        if SoNavy::Category.type(@type) == []
           scrape_categories
         end
         list_categories
@@ -51,7 +51,7 @@ class SoNavy::CLI
          # Scrapping Beauty category
         
         @type = "beauty"
-        if Dealio::Category.type(@type) == []
+        if SoNavy::Category.type(@type) == []
           scrape_categories
         end
         list_categories
@@ -94,8 +94,8 @@ class SoNavy::CLI
   def display_category_items(category)
      
     # Making sure to scrape only once
-     
-    # if category.description == [] 
+     puts "In Display  #{category.name} is"
+    # if category.name == [] 
         SoNavy::Scraper.scrape_items(category)
     # end  
      
