@@ -41,20 +41,20 @@ class SoNavy::Scraper
     
     
     
-    # puts "In 2nd scrape the length is #{items}"
+    # puts "In 2nd scrape  is #{items.css(".placeholder").text}"
   
     items.each do |card|
     
                  # Making sure no blanks or new line
                  
-        if !card.css("h3").nil? && !card.css("h2 a").nil? then
+        # if !card.css("h3").nil? && !card.css("h2 a").nil? then
         
               #creating an instance
               item = SoNavy::Item.new
               
               #   2nd level scrape
           
-        
+          
                   item.product = card.css("h3").text.delete!("        \n\t")
                   item.description = card.css("h2 a").text.delete!("\n\t")
                   # item.link = card.css(" h3 a").attributes["href"].value
@@ -62,12 +62,13 @@ class SoNavy::Scraper
               
                
             #   #Associated Objects
-                   
+         
+                   if !item.product.nil? then
                     category.add_item(item)
-                   
+                   end
       
            
-            end
+            # end
       end
        
   end
