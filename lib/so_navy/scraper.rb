@@ -29,10 +29,9 @@ class SoNavy::Scraper
     
     # Grabing first 5 elements on the page since 6-12 are not items
 
-    new_items=[]
-    # new_items=items[1..5]
+  
 
-    new_items.each do |card|
+    items.each do |card|
     
                  # Making sure no blanks or new line
                  
@@ -44,9 +43,10 @@ class SoNavy::Scraper
               #   2nd level scrape
           
         
-                  item.product = card.css(" h3").text
-                  item.description = card.css(" h2 a").text
-                  item.link = card.css(" h3 a").text
+                  item.product = card.css(" h3").text.delete!("        \n\t")
+                  item.description = card.css(" h2 a").text.delete!("\n\t")
+                  # item.link = card.css(" h3 a").attributes["href"].value
+
               
                
             #   #Associated Objects
