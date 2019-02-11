@@ -78,14 +78,15 @@ class SoNavy::CLI
     puts "\nChoose a category by selecting a number:".colorize(:light_blue)
     input = gets.strip.to_i
     max_value = SoNavy::Category.type(@type).length
+    puts "in Choose category #{max_value}"
     if input.between?(1,max_value)
       category = SoNavy::Category.type(@type)[input-1]
       display_category_items(category)
-    else
-      puts "\nPlease put in a valid input".colorize(:red)
-      list_categories
-      choose_category
-    end
+     else
+       puts "\nPlease put in a valid input".colorize(:red)
+       list_categories
+       choose_category
+     end
   end
   
   
@@ -94,9 +95,9 @@ class SoNavy::CLI
      
     # Making sure to scrape only once
      
-     if category.description == [] 
+    # if category.description == [] 
         SoNavy::Scraper.scrape_items(category)
-     end  
+    # end  
      
      if category.items == []
        puts "Sorry no inventory!"

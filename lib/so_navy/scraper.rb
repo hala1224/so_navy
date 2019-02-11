@@ -23,7 +23,7 @@ class SoNavy::Scraper
   
   
   def self.scrape_items(category)
-    
+    puts "In scrape url is #{category.url}"
     webpage = Nokogiri::HTML(open(category.url))
     items = webpage.css("div.shop-product")
     
@@ -36,7 +36,7 @@ class SoNavy::Scraper
     
                  # Making sure no blanks or new line
                  
-        if !card.css("h2").nil? && !card.css("h2").text.include?("\n\t")
+        # if !card.css("h2").nil? && !card.css("h2").text.include?("\n\t")
           
               #creating an instance
               item = SoNavy::Item.new
@@ -45,17 +45,17 @@ class SoNavy::Scraper
           
         
                   item.product = card.css(" h3").text
-                  item.description = card.css("h2 a").text
-        
+                  item.description = card.css(" h2 a").text
+                  item.link = card.css(" h3 a").text
               
-          
+               
             #   #Associated Objects
                    
                     category.add_item(item)
                    
       
            
-            end
+            # end
       end
        
   end
