@@ -5,8 +5,19 @@ class SoNavy::Scraper
   
     url = "https://somethingnavy.com/shop/category/#{type}"
     webpage = Nokogiri::HTML(open(url))
-    section = webpage.css("div.more div.dd-inner")
-    array_of_links = section.css("a")
+    # section = webpage.css("div.more div.dd-inner")
+    # array_of_links = section.css("a")
+     
+    index = 0 
+    if type === "clothing" then 
+      index=2
+    end
+    if type ==="accessories" then
+      index=5
+    end
+     
+    # direct link 
+    array_of_links = webpage.css("div.shop-nav > div > nav:nth-child(#{index}) > span:nth-child(#{index}) > div > div > a")
      
     array_of_links.map do |link|
      SoNavy::Category.new(link.text.delete!("\n\t"), link.attributes["href"].value, type)
