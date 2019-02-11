@@ -24,8 +24,8 @@ class SoNavy::CLI
   
         # Scrapping Designer Clothing category
         
-        @type = "clothes"
-        if Dealio::Category.type(@type) == []
+        @type = "clothing"
+        if SoNavy::Category.type(@type) == []
           scrape_categories
         end
         list_categories
