@@ -1,21 +1,38 @@
 class SoNavy::Scraper
   
-  
-  def self.scrape_categories(url)
-    
-    # puts "Made it to scraper"
+  def self.scrape_categories(type)
+    #open the url and scrape all the categories
+    url = "https://somethingnavy.com/shop/category/#{type}"
     webpage = Nokogiri::HTML(open(url))
-     array_of_links = webpage.css("div.content  h2  a")
-     
-    # .text.delete!("\n\t") deletes the blank spaces and new line 
-    
-    
-     array_of_links.each.map do |link|
-    
-       SoNavy::Category.new(link.text.delete!("\n\t"), link.attributes["href"].value)
-     end  
-    # return value is array of objects containing category name and url
+    section = webpage.css("div.shop-product")
+    array_of_links = section.css("h3 a")
+
+    array_of_links.map do |link|
+     SoNavy::Category.new(link.text, link.attributes["href"].value, type)
+    end
+    #return value will now be an array of objects
   end
+  
+#   array=page.css("div.shop-product h3") #designer
+# array1=page.css("div.shop-product h2 a") #"description"
+# array3=page.css("div.shop-product h3  a") #links
+  
+  
+  # def self.scrape_categories(url)
+    
+  #   # puts "Made it to scraper"
+  #   webpage = Nokogiri::HTML(open(url))
+  #   array_of_links = webpage.css("div.content  h2  a")
+     
+  #   # .text.delete!("\n\t") deletes the blank spaces and new line 
+    
+    
+  #   array_of_links.each.map do |link|
+    
+  #     SoNavy::Category.new(link.text.delete!("\n\t"), link.attributes["href"].value)
+  #   end  
+  #   # return value is array of objects containing category name and url
+  # end
   
   
   
