@@ -54,8 +54,10 @@ class SoNavy::CLI
         if SoNavy::Category.type(@type) == []
           scrape_categories
         end
-        list_categories
-        choose_category
+        # list_categories
+        #choose_category
+        category = SoNavy::Category.type(@type)[0]
+        display_category_items(category)
           
        when 4
           puts "Thanks for stopping by!"
