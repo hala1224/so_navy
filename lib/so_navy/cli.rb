@@ -3,23 +3,23 @@ class SoNavy::CLI
   attr_reader :type
   
   def start 
-    puts "\n \n      Welcome to so_navy!".colorize(:yellow) #instance method
+    puts "\n \n      Welcome to So_Navy!".colorize(:blue)
     menu
   end
   
   def menu
       
-    puts "\n Which category would you like to shop?"
+    puts "\n Which category would you like to shop?".yellow.underline
     puts ""
     puts "1".colorize(:yellow)  +" - Designer clothing"
-    puts "\n2".colorize(:yellow)+" - Designer Accesories"
-    puts "\n3".colorize(:yellow)+" - Beauty"
-    puts "\n4".colorize(:yellow)+" - to Exit"
+    puts "2".colorize(:yellow)+" - Designer Accesories"
+    puts "3".colorize(:yellow)+" - Beauty"
+    puts "4".colorize(:yellow)+" - to Exit"
     puts ""
     input = gets.strip.to_i 
     case input
        when 1
-         puts "\n            You chose Designer Clothing".colorize(:blue)
+         puts "\n            "+"You chose Designer Clothing".colorize(:blue).underline
          puts ""
   
         # Scrapping Designer Clothing category
@@ -33,7 +33,7 @@ class SoNavy::CLI
       
    
      when 2
-         puts "\n            You chose Designer Accesories".colorize(:blue)
+         puts "\n            "+"You chose Designer Accesories".colorize(:yellow).underline
          puts ""
          # Scrapping Designer Accesories category
         
@@ -46,7 +46,7 @@ class SoNavy::CLI
 
           
        when 3
-         puts "\n            You chose Beauty".colorize(:blue)
+         puts "\n            "+"You chose Beauty".colorize(:light_blue).underline
          puts ""
          # Scrapping Beauty category
         
@@ -71,12 +71,10 @@ class SoNavy::CLI
   
   def list_categories
     
-    # SoNavy::Category.type(@type).each.with_index(1) do |category, index|
-    
     SoNavy::Category.type(@type).each.with_index(1) do |category, index|
-  
-    puts "#{index}. #{category.name}"
-     end
+        puts "#{index}. #{category.name}"
+    end
+    
   end
   
   
@@ -84,7 +82,6 @@ class SoNavy::CLI
     puts "\nChoose a category by selecting a number:".colorize(:light_blue)
     input = gets.strip.to_i
     max_value = SoNavy::Category.type(@type).length
-    puts "in Choose category #{max_value}"
     if input.between?(1,max_value)
       category = SoNavy::Category.type(@type)[input-1]
       display_category_items(category)
@@ -100,19 +97,21 @@ class SoNavy::CLI
   def display_category_items(category)
      
     # Making sure to scrape only once
-     puts "In Display  #{category.name} "
+    
      if category.items == [] 
         SoNavy::Scraper.scrape_items(category)
      end  
+     
+     # Edge case if no inventory
      
     if category.items == []
       puts "Sorry no inventory!"
     else
      
-       puts "\n       Here are the items for ".colorize(:red)+"#{category.name}:\n".colorize(:blue)
+       puts "\n      "+"Here are the items for".colorize(:red).underline+" #{category.name}:\n".colorize(:blue)
        category.items.each.with_index(1) do |item, index|   #represents an array of item objects
           #print out info about each item
-          puts "\n#{index}. #{item.product}".colorize(:light_blue) if item.product
+          puts "\n#{index}. Designed by : ".yellow + "#{item.product}".colorize(:light_blue).underline if item.product
           puts item.description if item.description
       end
       puts "\n       That's all for this weeks'  ".colorize(:yellow)+"#{category.name}!\n".colorize(:light_blue)
@@ -132,7 +131,7 @@ class SoNavy::CLI
 
   
   def second_menu
-    puts "\n       Would you like to:".colorize(:red)
+    puts "\n       "+"Would you like to:".colorize(:red).underline
     puts""
     if @type != "beauty" then
       puts "'C'".colorize(:blue) + " - look at another " + "Category?".colorize(:light_blue)

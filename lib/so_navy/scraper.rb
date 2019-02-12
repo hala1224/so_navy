@@ -42,7 +42,7 @@ class SoNavy::Scraper
   
   
   def self.scrape_items(category)
-    puts "In scrape url is #{category.url}"
+    
   
     webpage = Nokogiri::HTML(open(category.url))
     items = webpage.css("div.shop-product")
