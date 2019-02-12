@@ -1,8 +1,8 @@
 # SoNavy
-"Hello world"
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/so_navy`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+Welcome to so_navy! 
+This app scrapes the categories, designers, and items from he trendy website "Something Navy.com".
+
 
 ## Installation
 
@@ -22,7 +22,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+www.somethingnavy.com caters to a savy and thrifty shopper who loves designer, new and trendy things.The website is a popular website featuring a combination of a blog, informantional and e-commerce format . But sometimes you want to go right to the shopping and skip the whole blog post. The So Navy app does just that. Easily navigate through shopping categories to find the desired sale item. 
+
+
 
 ## Development
 
