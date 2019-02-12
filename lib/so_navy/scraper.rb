@@ -8,16 +8,20 @@ class SoNavy::Scraper
     # section = webpage.css("div.more div.dd-inner")
     # array_of_links = section.css("a")
      
-    index = 0 
+    index1 = 0
+    index2=0
     if type === "clothing" then 
-      index=2
+      index1=2
+      index2=2
     end
-    if type ==="accessories" then
-      index=5
+    if type === "accessories" then
+      index1=2
+      index2=5
     end
      
+    # array=page.css("div.shop-nav > div > nav:nth-child(2) > span:nth-child(5) > div > div a")
     # direct link 
-    array_of_links = webpage.css("div.shop-nav > div > nav:nth-child(#{index}) > span:nth-child(#{index}) > div > div > a")
+    array_of_links = webpage.css("div.shop-nav > div > nav:nth-child(#{index1}) > span:nth-child(#{index2}) > div > div > a")
                                   
     array_of_links.map do |link|
      SoNavy::Category.new(link.text.delete!("\n\t"), link.attributes["href"].value, type)
