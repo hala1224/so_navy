@@ -70,8 +70,12 @@ class SoNavy::CLI
   end 
   
   def list_categories
-    SoNavy::Category.all.each.with_index(1) do |category, index|
-      puts "#{index}. #{category.name}"
+    
+    # SoNavy::Category.type(@type).each.with_index(1) do |category, index|
+    
+    SoNavy::Category.type(@type).each.with_index(1) do |category, index|
+  
+    puts "#{index}. #{category.name}"
      end
   end
   
@@ -96,25 +100,27 @@ class SoNavy::CLI
   def display_category_items(category)
      
     # Making sure to scrape only once
-     puts "In Display  #{category.name} is"
-    # if category.name == [] 
+     puts "In Display  #{category.name} "
+     if category.items == [] 
         SoNavy::Scraper.scrape_items(category)
-    # end  
+     end  
      
-     if category.items == []
-       puts "Sorry no inventory!"
-     else
+    if category.items == []
+      puts "Sorry no inventory!"
+    else
      
        puts "\n       Here are the items for ".colorize(:red)+"#{category.name}:\n".colorize(:blue)
        category.items.each.with_index(1) do |item, index|   #represents an array of item objects
           #print out info about each item
-          puts "\n#{index}. #{item.product}".colorize(:light_blue)
-          puts item.description
+          puts "\n#{index}. #{item.product}".colorize(:light_blue) if item.product
+          puts item.description if item.description
       end
       puts "\n       That's all for this weeks'  ".colorize(:yellow)+"#{category.name}!\n".colorize(:light_blue)
     end
      second_menu
   end
+  
+  
   
 
   
@@ -128,7 +134,9 @@ class SoNavy::CLI
   def second_menu
     puts "\n       Would you like to:".colorize(:red)
     puts""
-    puts "'C'".colorize(:blue) + " - look at another " + "Category?".colorize(:light_blue)
+    if @type != "beauty" then
+      puts "'C'".colorize(:blue) + " - look at another " + "Category?".colorize(:light_blue)
+    end
     puts "'S'".colorize(:blue) + " - go back to  " +"Start?".colorize(:light_blue)
     puts "'E'".colorize(:blue) + " - Exit? ".colorize(:light_blue)
     puts ""
