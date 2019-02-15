@@ -4,6 +4,7 @@ class SoNavy::Scraper
     
     url = "https://somethingnavy.com/shop/category/#{type}"
     
+    
    
     if type === "beauty" then
       # In Category Beauty no drop down window 
@@ -18,24 +19,25 @@ class SoNavy::Scraper
           index1 = 0
           index2=0
           if type === "clothing" then 
-            index1=2
+            index1=3
             index2=2
           end
           if type === "accessories" then
-            index1=2
+            index1=3
             index2=5
           end
            
         
           # direct link 
           
-          array_of_links = webpage.css("div.shop-nav > div > nav:nth-child(#{index1}) > span:nth-child(#{index2}) > div > div > a")
+          array_of_links = webpage.css( "div.shop-nav > div > nav:nth-child(#{index1}) > span:nth-child(#{index2}) > div > div > a")
                                         
           array_of_links.map do |link|
            SoNavy::Category.new(link.text.delete!("\n\t"), link.attributes["href"].value, type)
           end
       end    
     #return value will now be an array of objects
+  
   end
   
   
