@@ -12,7 +12,7 @@ class SoNavy::CLI
     puts "\n Which category would you like to shop?".yellow.underline
     puts ""
     puts "1".colorize(:yellow)  +" - Designer clothing"
-    puts "2".colorize(:yellow)+" - Designer Accesories"
+    puts "2".colorize(:yellow)+" - Designer Accessories"
     puts "3".colorize(:yellow)+" - Beauty"
     puts "4".colorize(:yellow)+" - to Exit"
     puts ""
@@ -33,7 +33,7 @@ class SoNavy::CLI
       
    
      when 2
-         puts "\n            "+"You chose Designer Accesories".colorize(:yellow).underline
+         puts "\n            "+"You chose Designer Accessories".colorize(:yellow).underline
          puts ""
          # Scrapping Designer Accesories category
         
